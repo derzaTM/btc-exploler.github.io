@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Bitcoin Explorer</title>
+  <style>
+    body {
+      background-color: #0d1117;
+      color: #c9d1d9;
+      font-family: monospace;
+      padding: 20px;
+    }
+    .container {
+      max-width: 600px;
+      margin: auto;
+      background-color: #161b22;
+      border-radius: 10px;
+      padding: 20px;
+      box-shadow: 0 0 20px rgba(255, 255, 255, 0.1);
+    }
+    input, button {
+      width: 100%;
+      padding: 10px;
+      margin-top: 10px;
+      border: none;
+      border-radius: 5px;
+      font-family: monospace;
+    }
+    input {
+      background-color: #0d1117;
+      color: #c9d1d9;
+      border: 1px solid #30363d;
+    }
+    button {
+      background-color: #238636;
+      color: white;
+      cursor: pointer;
+    }
+    .results {
+      margin-top: 20px;
+    }
+    .tx {
+      background: #21262d;
+      padding: 10px;
+      margin: 5px 0;
+      border-radius: 5px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>Bitcoin Wallet Explorer</h2>
+    <input type="text" id="btcAddress" placeholder="Enter BTC Address...">
+    <button onclick="generateFakeData()">Search</button>
+    <div class="results" id="results"></div>
+  </div>
+
+  <script>
+    function generateFakeData() {
+      const address = document.getElementById("btcAddress").value;
+      const results = document.getElementById("results");
+
+      const validAddress = "1A1zP1eP5QGefi2DMPTfTL5SLmv7DivfNa";
+
+      if (address !== validAddress) {
+        results.innerHTML = `<p style='color:red'>This address is not available in the database</p>`;
+        return;
+      }
+
+      const btcBalance = 0.0013625;
+      const usdValue = 132.00;
+
+      const fixedTransactions = `
+        <div class='tx'>📥 Received 0.00050000 BTC on 2024-12-12</div>
+        <div class='tx'>📥 Received 0.00100000 BTC on 2025-01-10</div>
+        <div class='tx'>📥 Received 0.00020000 BTC on 2025-02-08</div>
+        <div class='tx'>📥 Received 0.00025000 BTC on 2025-03-05</div>
+        <div class='tx'>📥 Received 0.00011250 BTC on 2025-04-01</div>
+      `;
+
+      results.innerHTML = `
+        <p><strong>Address:</strong> ${address}</p>
+        <p><strong>BTC Balance:</strong> ${btcBalance} BTC</p>
+        <p><strong>USD Value:</strong> $${usdValue}</p>
+        <h3>Recent Transactions:</h3>
+        ${fixedTransactions}
+      `;
+    }
+  </script>
+</body>
+</html>
